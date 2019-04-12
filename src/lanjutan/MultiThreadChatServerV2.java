@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package lanjutan;
 
 import java.io.DataInputStream;
@@ -12,13 +8,8 @@ import java.net.Socket;
 import java.sql.*;
 import java.util.Scanner;
 
-/**
- *
- * @author ayya
- */
 public class MultiThreadChatServerV2 
 {
-
   // The server socket.
   private static ServerSocket serverSocket = null;
   // The client socket.
@@ -82,14 +73,6 @@ public class MultiThreadChatServerV2
     }
   }
 }
-/*
- * The chat client thread. This client thread opens the input and the output
- * streams for a particular client, ask the client's name, informs all the
- * clients connected to the server about the fact that a new client has joined
- * the chat room, and as long as it receive data, echos that data back to all
- * other clients. When a client leaves the chat room this thread informs also
- * all the clients about that and terminates.
- */
 
 class clientThread extends Thread 
 {
@@ -103,6 +86,13 @@ class clientThread extends Thread
   private String pass;
   private String key;
 
+    public clientThread(Socket clientSocket, clientThread[] threads) 
+  {
+    this.clientSocket = clientSocket;
+    this.threads = threads;
+    maxClientsCount = threads.length;
+  }
+    
   public static Connection getConnection() throws Exception
   {
     try 
@@ -143,13 +133,6 @@ class clientThread extends Thread
           e.printStackTrace();
           return false;
       }
-  }
-  
-  public clientThread(Socket clientSocket, clientThread[] threads) 
-  {
-    this.clientSocket = clientSocket;
-    this.threads = threads;
-    maxClientsCount = threads.length;
   }
   
   public void run() {

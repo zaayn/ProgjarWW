@@ -262,18 +262,20 @@ public class ClientGUI extends javax.swing.JFrame {
    
     
     private void connect(){
-        try{
+        try
+        {
             host = InetAddress.getByName(this.ip.getText());
-        }catch(UnknownHostException ioe){
+        }
+        catch(UnknownHostException ioe){
             this.txtArea.append("\nHost ID not found\n");
             System.exit(1);
         }
         
-        sendmsg();
+        message();
     }
   
     
-    private void sendmsg(){
+    private void message(){
         Socket socket = null;
         
         try{
